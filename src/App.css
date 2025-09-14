@@ -1,10 +1,10 @@
-.task-list{
+
+.add-task-form {
     display: flex;
-    justify-content: center;
-}
-
-.task-item{
-
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 20px;
 }
 
 .add-task-button{
