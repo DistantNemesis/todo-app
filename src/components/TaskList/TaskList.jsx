@@ -15,14 +15,15 @@ function TaskList() {
                 {tasks.length === 0 ? (
                   <p>No tasks are in your to-do list &#128077;</p>
                 ) : (
-                  tasks.map((task, index) => (
+                <ul className = "task-list">
+                  {tasks.map((task, index) => (
                     <li className="task-item" key={index}>
                       <p>{task}</p>
                     </li>
-                  ))
-                )}
-              <div className="buttons">
-                  <button className="add-task-button" onClick={addTask}>Add Task</button>
+                  ))}
+                </ul>)}
+              <div>
+                  <button className="click-button" onClick={addTask}>Add Task</button>
                   <select className="select-task-button" name="Change View">
                     <option> View All Tasks</option>
                     <option> View Completed Tasks</option>

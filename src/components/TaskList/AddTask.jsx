@@ -10,7 +10,10 @@ function AddTask({setTasks, tasks, setShowForm}) {
                 <textarea id="task-description" style={{ resize: 'none' }} required cols={70} rows={20} placeholder="Task Description" />
                 <label htmlFor="due-date">Due Date</label>
                 <input id="due-date" required type="date" />
-                <input type="submit" value="Add Task" />
+                <div className="add-task-form-buttons">
+                    <input className="click-button" type="submit" value="Add Task" />
+                    <button id="cancel-button" type="button"className="click-button" onClick={() => setShowForm(false)}>Cancel</button>
+                </div>
             </form>
         </>
     )
