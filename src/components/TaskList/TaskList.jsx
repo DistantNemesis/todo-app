@@ -18,7 +18,7 @@ function TaskList() {
                 <ul className = "task-list">
                   {tasks.map((task, index) => (
                     <li className="task-item" key={index}>
-                      <p>{task}</p>
+                      <p>{task.taskName}</p>
                     </li>
                   ))}
                 </ul>)}

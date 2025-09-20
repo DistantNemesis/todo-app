@@ -18,7 +18,12 @@ function AddTask({setTasks, tasks, setShowForm}) {
         </>
     )
     function onSubmit(event) {
-        var newTask = document.getElementById("task-name").value;
+        var newTask = {
+            taskName : document.getElementById("task-name").value,
+            taskCompleted : false,
+            taskDueDate : document.getElementById("due-date").value,
+            taskAddDate : new Date()
+        };
         event.preventDefault();
         setTasks([...tasks, newTask]);
         setShowForm(false);
