@@ -37,24 +37,30 @@ function TaskList() {
   function handleFilterChange() {
     setFilter(document.getElementById("select-task").value);
   }
-
-
-}
-  function Filter({filter, tasks}) {
+  function Filter({filter}) {
     let filteredTasks = [...tasks];
     if(filter === 'active') {
-      filteredTasks = filteredTasks.filter(task => !task.completed);
+      filteredTasks = filteredTasks.filter(task => !task.taskCompleted);
+      if(filteredTasks.length === 0) {
+        console.log("No active tasks found");
+        return <p>No active tasks remaining &#128077;</p>
+      }
     }
     else if(filter === 'completed') {
-      filteredTasks = filteredTasks.filter(task => task.completed);
+      filteredTasks = filteredTasks.filter(task => task.taskCompleted);
+      if(filteredTasks.length === 0) {
+        console.log("No completed tasks found");
+        return <p>No completed tasks yet &#128577;</p>
+      }
     }
     filteredTasks.sort((a, b) => a.taskDueDate.localeCompare(b.taskDueDate));
 
     return (
       <ul className = "task-list">
-        {filteredTasks.map((task, index) => (
-          <li key={index}>
+        {filteredTasks.map((task) => (
+          <li key={task.taskID}>
             <div className="task-item" >
+              <input type="checkbox" checked={task.taskCompleted} onChange={() => toggleTaskCompletion(task.taskID, setTasks)}/>
               <div>
                 <p>Task: {task.taskName}</p>
               </div>
@@ -66,5 +72,11 @@ function TaskList() {
         ))}
       </ul>
     )
+    function toggleTaskCompletion(id) {
+      const filteredTasks = tasks.map(task => task.taskID === id ? {...task, taskCompleted: !task.taskCompleted} : task);
+      console.log("toggling:", id);
+      setTasks(filteredTasks);
+    }
   }
+}
 export default TaskList
