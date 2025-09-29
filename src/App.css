@@ -14,6 +14,11 @@ header{
     margin: 20px;
 }
 
+#task-description{
+    width: 100%;
+    max-width: 558px;
+    padding: 0;
+}
 .add-task-form-buttons{
     display: flex;
     flex-direction: row;
@@ -47,8 +52,9 @@ header{
 
 
 .task-list{
-    width: 500px;
-    word-wrap: break-word;
+    width: 100%;
+    max-width: 600px;
+    overflow-wrap: break-word;
     text-align: left;
     margin: 0 auto;
     padding: 0;
