@@ -32,12 +32,12 @@ function TaskList({tasks, setTasks, filter}) {
             <div className="task-item" >
               <input className ="completion-checkbox" type="checkbox" checked={task.taskCompleted} onChange={() => toggleTaskCompletion(task.taskID, setTasks)}/>
               <div>
-                <p>Task: {task.taskName}</p>
+                <p className ={task.taskCompleted ? "completed-task-name" : "incomplete-task-name"} > Task: {task.taskName} </p>
               </div>
               <div>
                 <p>Due Date: {task.taskDueDate}</p>
               </div>
-              <button className="task-options-button"><BsThreeDots /></button>
+              <button className="task-options-button" onClick={() => handleTaskMenuClick(task.taskID)}><BsThreeDots /></button>
             </div>
           </li>
         ))}
@@ -48,6 +48,10 @@ function TaskList({tasks, setTasks, filter}) {
     const filteredTasks = tasks.map(task => task.taskID === id ? {...task, taskCompleted: !task.taskCompleted} : task);
     console.log("toggling:", id);
     setTasks(filteredTasks);
+  }
+
+  function handleTaskMenuClick(id) {
+
   }
 }
 export default TaskList

@@ -13,12 +13,16 @@ header{
     gap: 10px;
     margin: 20px;
 }
-
 #task-description{
     width: 100%;
     max-width: 558px;
     padding: 0;
 }
+
+.completed-task-name{
+    text-decoration: line-through;
+}
+
 .add-task-form-buttons{
     display: flex;
     flex-direction: row;
