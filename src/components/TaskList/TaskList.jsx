@@ -4,17 +4,22 @@ import { BsThreeDots } from "react-icons/bs";
 function TaskList({tasks, setTasks, filter}) {
 
   const [openTaskMenuId, setOpenTaskMenuId] = useState(null);
+  const [openTaskCardId, setOpenTaskCardId] = useState(null);
 
   useEffect(() => {
     const handleClick = (event) => {
       if (!event.target.closest(".task-options-button") && !event.target.closest(".task-options-content")) {
         setOpenTaskMenuId(null);
       }
+      if (!event.target.closest(".task-name-div") && !event.target.closest(".task-card")) {
+        setOpenTaskCardId(null);
+      }
     };
 
     window.addEventListener("click", handleClick);
     return () => window.removeEventListener("click", handleClick);
   }, []);
+
 
 
   if (tasks.length === 0) {
@@ -45,15 +50,22 @@ function TaskList({tasks, setTasks, filter}) {
           <li key={task.taskID}>
             <div className="task-item">
               <input className ="completion-checkbox" type="checkbox" checked={task.taskCompleted} onChange={() => toggleTaskCompletion(task.taskID, setTasks)}/>
-              <div>
+              <div className ="task-name-div" onClick={() => handleTaskCardClick(task.taskID)}>
                 <p className ={task.taskCompleted ? "completed-task-name" : "incomplete-task-name"} > Task: {task.taskName} </p>
+                {openTaskCardId === task.taskID && (
+                  <div className="task-card-background">
+                    <div className="task-card-content">
+                      <p className ="task-card-title">{task.taskName}</p>
+                      <p>{task.taskDescription}</p>
+                    </div>
+                  </div>
+                )}
               </div>
               <div>
                 <p>Due Date: {task.taskDueDate}</p>
               </div>
               <div className="task-options-div">
                 <button className="task-options-button" onClick={() => handleTaskMenuClick(task.taskID)}><BsThreeDots /></button>
-
                 {openTaskMenuId === task.taskID && (
                   <div className="task-options-content">
                     <button onClick={() => handleEditTask(task.taskID)}> Edit </button>
@@ -82,6 +94,18 @@ function TaskList({tasks, setTasks, filter}) {
     else {
       setOpenTaskMenuId(id);
       console.log("toggling on menu for task ", id);
+    }
+  }
+
+  function handleTaskCardClick(id) {
+    if (openTaskCardId === id) {
+      setOpenTaskCardId(null);
+      console.log("toggling off card for task ", id);
+    } 
+    
+    else {
+      setOpenTaskCardId(id);
+      console.log("toggling on card for task ", id);
     }
   }
 
